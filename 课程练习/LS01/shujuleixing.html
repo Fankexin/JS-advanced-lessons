@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Page Title</title>
+</head>
+<body>
+    
+</body>
+<script>
+    var object3 ={};
+    var object4 ={};
+    console.log(object3==object4);//指向不同的堆区，false
+    var num3 =3;
+    var num4 =3;
+    console.log(num3==num4);//true
+    console.log(num3===num4);//true
+
+    console.log(isFinite(123));//true
+    var y1 = 2/0;
+    console.log(y1);//Infinity
+    var y2 = -2/0;
+    console.log(y2);//-Infinity
+    isFinite(y2);//false，非有限数
+    isFinite(23);//true，有限数
+
+    var str = "ab-cd-ef";
+    console.log(str.split("-"));//字符串转化成数组
+    //slice(起始位置，结束位置的后一个)
+    //substr(截取位置，截取长度)
+    console.log(str.slice(0,2));//ab
+    console.log(str.substr(0,2));//ab
+
+    //var str2 = new String("aaaa");
+    var str1 = "aaaa";
+    str1.substr(0,2);
+    //装箱操作
+    var str1 = "aaaa";
+    var str2 = new String(str1);
+    str2.substr(0,2);
+
+    console.log(Number('123xx'));//NaN
+    console.log(parseFloat("123.345xx"));
+    console.log(parseInt("123.345xx"));
+    var e = !23;
+    console.log(e);//false
+    var f = !!12;
+    console.log(f);//true
+</script>
+</html>
