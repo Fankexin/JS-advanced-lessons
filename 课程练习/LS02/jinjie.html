@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    //基本数据类型，在操作过程中，会有自动装箱过程，
+    //生成临时对象，临时对象在使用完成后会自动释放
+    var num = 10;
+    console.log(num.toString());//toString()将数字转换成字符串
+
+    var num = 10;
+    var numObj = new Number(num);
+    console.log(numObj.toString());
+
+    num.p = 10;//临时对象，用完立刻释放掉
+    var t = num.p;
+    console.log(t);//undefined
+
+    var num = 345.6789;
+    var numO2 = new Number(num);
+    console.log(numO2);
+    console.log(num);
+    console.log(num.toFixed(3));//345.679   保留几位小数
+    console.log(num.toPrecision(1));//3e+2  有效位数
+    console.log(num.toPrecision(2));//3.5e+2
+    console.log(num.toPrecision(3));//346
+    console.log(num.toPrecision(4));//345.7
+    console.log(num.toExponential(2));//3.46e+2     小数点后几位
+    console.log(num.toExponential(3));//3.457e+2
+
+    var str = "sjfnvoejklsm";
+    var strObj = new String(str);
+    console.log(strObj.charAt(2));//f   返回特定索引位置的字符
+    console.log(str.charCodeAt(0));//115    返回特定索引位置的Unicode码
+    console.log(str.slice(2,5));//fnv   slice(截取的起始位置,截取的结束位置的后一个位置)
+    console.log(str.substr(2,3));//fnv   substr(截取位置，截取长度)
+
+    //substring(截取字符串起始位置,截取字符串的结束位置)
+    //起始值>结束值  互换位置
+    //如果有超出索引位置 0 - str.length-1  自动截断
+    console.log(str.substring(2,5));//fnv    从起始位置到结束位置的一个子集
+    console.log(str.substring(3,0));//sjf
+    console.log(str.substring(-3,5));//sjfnv    从0之后开始，负数不算
+
+    //split(特定的字符，限定元素个数) 将字符串以特定的字符分割，将字符串作为数组元素生成数组
+    var str1 = "abc-def-ght";
+    console.log(str1.split("-"));//数组 ["abc","def","ght"]
+    console.log(str1.split("-",2));//数组 ["abc","def"]
+
+    //trim()去除字符串两边的空白字符，字符串内部的不去除
+    var str2 = "    asd rty   k  ";
+    console.log(str2.trim());//asd rty   k
+
+    var str3 ="hello";
+    console.log(str3.concat("world"));//helloworld
+
+    //基本数据类型，变量__proto__属性 == 变量的构造函数prototype
+    //num.__proto__ == Number.prototype
+    var num1 = 20; 
+    console.log(num1.__proto__);
+    console.log(Number.prototype);
+</script>
+</html>
