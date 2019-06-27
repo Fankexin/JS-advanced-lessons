@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    /*
+        之前var声明变量的方式，真有一种
+        全局变量i，所有的延迟执行都在共用一个i
+
+        let声明的方式，每次循环都会形成自己的一个独立作用域
+    */
+    var username='lisi';
+    if(true){
+        var username='zhangsan';
+    }
+    console.log(username);
+
+    /*
+        let声明的变量会拥有块级作用域{}
+    */
+    let name='lisi';
+    if(true){
+        let name='zhangsan';
+    }
+    console.log(name);
+
+
+    for(let i = 0;i<3;i++){
+        setTimeout(function(){
+            console.log(new Date(),i);
+        },i*1000)
+    }
+
+
+    /*
+        const声明的变量不可修改
+    */
+
+    const PI=3.14159265358;
+    
+</script>
+</html>

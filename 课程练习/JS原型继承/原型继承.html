@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    //JavaScript是基于
+    var obj={
+        num:1,
+        str:"hi",
+        sayHi:function(){
+            console.log(this.str);
+        }
+    };
+    var newObj=Object.create(obj);
+    console.log(newObj.__proto__==obj);//true
+    console.log(newObj.num);//1
+    newObj.sayHi();//hi
+
+    // obj1.__proto__==Object.prototype
+    // Object.prototype.__proto__=null
+    var obj1={z:3};
+    console.log(obj1.__proto__);//Object
+    console.log(obj1.__proto__.__proto__);//null
+
+    var obj2=Object.create(obj1);
+    console.log(obj2.__proto__);
+    console.log(obj2.__proto__.__proto__);
+    //console.log(obj1.__proto__.__proto__.__proto__);//null
+
+    var obj3={z:1};
+    var obj4=Object.create(obj3);
+    console.log(obj3.__proto__==Object.prototype);
+    console.log(obj4.__proto__);//obj3
+    console.log(obj4.__proto__.__proto__);//Object
+    console.log(obj4.__proto__.__proto__.__proto__);//null
+
+    function Person(username,age){
+        this.username=username;
+        this.age=age;
+    }  
+    Person.prototype.sayHi=function(){
+        console.log(this.username);
+    }
+    var person1=new Person("zhangsan",30);
+    var person2=new Person("lisi",20);
+    console.log(person1.__proto__==person2.__proto__);//true
+    console.log(person1.__proto__==Person.prototype);//true
+    //person1和person2共用sayHi方法，节省内存空间
+    person1.sayHi();
+    person2.sayHi();
+
+    // Person.prototype==person.__proto__;//true
+    // Person.prototype.constructor==Person;//true
+    // Person.prototype.__proto__==Object.prototype;//true
+    // Object.prototype.constructor==Object;//true
+    // Object.prototype.__proto__==null;//true
+
+    // 定义一个车（car）的对象，height width weight
+    // 创建一个小轿车（smallcar）的对象，继承车相关的属性
+    // 自己具有color seatnum create方法，以及构造函数的形式
+    var car={
+        height:150,
+        width:200,
+        weight:2000
+    }
+    var smallcar=Object.create(car);
+    smallcar.color="red";
+    smallcar.seatnum=4;
+    console.log(smallcar.height);
+    console.log(smallcar.width);
+    function createSmallCar(color,seatnum){
+        this.color=color;
+        this.seatnum=seatnum;
+    }
+    createSmallCar.prototype=car;
+    var smallcar2=new createSmallCar("red",4);
+
+    </script>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    /*
+        使用static方法（）来添加静态方法
+        静态方法通过类进行调用
+        静态方法内部的this指向类本身
+    */
+    class Point{
+        constructor(){
+            this.x=1;
+            this.y=1;
+        }
+        show(){
+            console.log(this.x);
+        }
+        showy(){
+            console.log(this.y);
+        }
+        static showPoint(){
+            console.log(this);
+        }
+    }
+    let p1=new Point();
+    p1.show();
+    Point.showPoint();
+
+    
+    /*继承的实现方法*/
+    let obj1={"x":1};
+    let obj2=Object.create(obj1);
+    console.log(obj2.x);
+
+    let obj3={"y":2};
+    obj4.__proto__=obj3;
+
+    function fn1(){
+        this.x=1;
+    }
+    fn1.prototype.show=function(){
+        console.log(this.x);
+    }
+    let obj5=new fn1();
+
+    //构造函数继承的处理过程
+    function Child(x,y){
+        this.x = x;
+        this.y = y;
+    }
+    function Parent(x,y,z){
+        Child.call(this,x,y);
+        this.z = z;
+    }
+    let p1 = new Parent(1,2,3);
+    console.log(p1);//Parent {x: 1, y: 2, z: 3}
+
+    /*
+        子类继承父类extends
+        在子类的构造函数里面super指向父类的构造函数
+        继承的子类构造函数中，必须得在super()调用后才能使用this
+
+        super在子类的原型方法中，指向父类的prototype
+    */
+    class Parent1 {
+        constructor(x,y){
+            this.x=x;
+            this.y=y;
+        }
+        parentshow(){
+            console.log('hello');
+        }
+    }
+    class Child1 extends Parent1{
+        constructor(x,y,z){
+           super(x,y);
+           this.z=z; 
+        }
+        show(){
+            super.parentshow();
+            console.log(this);
+        }
+    }
+    let c1=new Child1(1,2,3);
+    console.log(c1);
+</script>
+</html>

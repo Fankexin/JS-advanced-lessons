@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    //symbol生成唯一值，不相等
+    let s1 = Symbol("s1");
+    let s2 = Symbol("s2");
+    let s3 = Symbol("s1");
+    console.log(s1==s3);//false
+
+    /*Symbol作为对象的属性名，永远不会重复
+        对象[Symbol]
+        {
+            [Symbol]:"属性值"
+        }
+    */
+    let obj = {};
+    obj[s1] = "hello";
+    // let obj={
+    //     [s1]:"world"
+    // }
+    console.log(obj[s1]);
+    
+    // Symbol.for()首先查看是否存在该描述信息的Symbol变量
+    // 存在的话直接获取，不存在的话就会新建一个Symbol
+    let s4=Symbol.for("foo");
+    console.log(Symbol.for("foo")==Symbol.for("foo"));
+
+    let s5=new Set([1,2,3,4,5,6,1,2,3]);
+    console.log(s5);//Set(6) {1, 2, 3, 4, 5, 6}
+    for(var i of s5){
+        console.log(i);
+    }
+
+
+    let m1 = new Map([
+        ["username","zhangsan"],
+        ["age",20],
+        ["sex","male"]
+    ]);
+    console.log(m1.keys());//{"username", "age", "sex"}
+    for(let j of m1.keys()){
+        console.log(j);//username  age   sex
+    }
+
+    console.log(m1.size);//3
+    for(let i of m1){
+        console.log(i);//["username", "zhangsan"]   ["age", 20]   ["sex", "male"]
+    }
+    console.log(m1.set("wight","60kg"));
+    console.log(m1.get("username"));//zhangsan
+    console.log(m1.delete("username"));//true
+    console.log(m1.has("username"));//false
+
+
+</script>
+</html>

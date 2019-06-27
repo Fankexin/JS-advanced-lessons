@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    function createIterator(arr){
+        var i = 0;
+        return {
+            next:function(){
+                return i < arr.length?
+                {value:arr[i++],done:true} :
+                {value:undefined,done:false};
+            }
+        }
+    }
+    var iterator = createIterator([1,2,3,4]);
+    console.log(iterator.next());
+    console.log(iterator.next());
+    console.log(iterator.next());
+    console.log(iterator.next());
+    console.log(iterator.next());
+
+    let m1 = [1,2,3,1,4];
+    for(let j of m1){
+        console.log(j);
+    }
+    /* arguments*/
+    /*
+        判断数据结构能否被遍历器所遍历,
+        不能直接真的对象应用遍历器
+    */
+
+    let arr2 = [1,2,3];
+    let person = {"name":"zhangsan","age":20};
+    console.log(arr2[Symbol.iterator]);
+
+    function* helloGenerator(){
+        yield "hello";
+        yield "world";
+        return "ending";
+    }
+    var iterator = helloGenerator();
+    console.log(iterator.next());
+    console.log(iterator.next());
+    console.log(iterator.next());
+
+    let obj={};
+    obj[Symbol.iterator]=function*(){
+        yield 1;
+        yield 2;
+        yield 3;
+    }
+    for(let i of obj){
+        console.log(i);
+    }
+
+    let str="abcdefg";
+    for(let i of str){
+        console.log(i);
+    }
+    /*
+        promise 将异步时代码写成同步的方式进行执行
+    */
+
+    setTimeout(function(){
+        console.log("时间到");
+    },3000);
+    console.log("同步代码1");
+    console.log("同步代码2");
+
+    new Promise(function(resolve,reject){
+        setTimeout(function(){
+            console.log("时间到");
+            //resolve是异步操作成功时的回调函数
+            resolve();
+        },3000);
+    }).then(function(val){
+        console.log(val);
+    },function(){
+
+    }).catch(function(){
+        //捕获异常
+    }).finally(function(){
+        console.log("不论如何都会执行");
+    })
+    /*
+        new Promise(function(resolve,reject){
+            异步操作
+            resolve();异步操作成功时的调用
+            reject();异步操作失败时的调用
+        }).then(function(){
+            其实就是resolve的函数定义
+        },function(){
+            其实是reject函数的定义
+        })
+    */
+</script>
+</html>

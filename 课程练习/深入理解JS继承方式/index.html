@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    var superobj={
+        x:1,
+        y:2
+    };
+    var subobj_first=Object.create(superobj);
+    var subobj_second=Object.create(superobj);
+    subobj_first.__proto__.x=5;
+    console.log(subobj_second.x);//5
+    subobj_first.x=3;
+    console.log(subobj_second.x);//5
+
+    function person(name){
+        this.name=name;
+    }
+    person.prototype.age=20;
+    person.prototype.showname=function(){
+        console.log(this.name);
+    }
+    function student(id){
+        this.id=id;
+    }
+    // person name属性mike，
+    // person.__proto__.age
+    // person.__proto__.showname
+    student.prototype=new person("mike");
+    var p=new person("mike");
+    student.prototype=p;
+    var s1=new student(2017010);
+    var s2=new student(2017011);
+    console.log(s1.id,s2.id);
+    // s1自身上没有age，s1.__proto__==student.prototype
+    // student.prototype=p;p对象上没有age属性
+    // s1.__proto__.__proto__==p.__proto__
+    // p.__proto__==person.prototype;
+    console.log(s1.age,s2.age);
+    console.log(s1.name,s2.name);
+
+    function Person1(name,age){
+        this.name=name;
+        this.age=age;
+    };
+    Person1.prototype.showname=function(){
+        console.log(this.name);
+    }
+    function Student1(name,age,id){
+        Person1.call(this,name,age);
+        this.id=id;
+    }
+    Student1.prototype.__proto__=Person1.prototype;
+    var ss1=new Student1("xx",22,2017001);
+    var ss2=new Student1("yy",22,2017002);
+    ss1.showname();
+    console.log(ss1);
+
+    function P1(name,age){
+        this.name=name;
+        this.age=age;
+    };
+    P1.prototype.showname=function(){
+        console.log(this.name);
+    };
+    function S1(name,age,id){
+        P1.call(this,name,age);
+    }
+    S1.prototype=Object.create(P1.prototype);
+    S1.prototype.constructor=S1;
+    var sss1=new S1("xxx",22,2017001);
+    var sss2=new S1("xxx",22,2017002);
+</script>
+</html>

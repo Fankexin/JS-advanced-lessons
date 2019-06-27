@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    var a = 45;
+    if(54 == a){
+        console.log("判等，值写在前面，自变量写在后边");
+    }
+    var a1 = 20;
+    var a2 = "20";
+    //隐式类型转换
+    if(a1 == a2){
+
+    }
+    //===先判断类型，然后在判断值
+    if(a1 === a2){
+        
+    }
+
+    var x = "1";
+    //++x先进行运算，然后输出
+    //x++先输出，然后在运算
+    console.log(++x); 
+    console.log(x++); 
+    console.log(x);
+    //字符串拼接
+    var x = "1";
+    console.log(x+=1);
+
+    var score = 76;
+    if(score >90){
+        console.log("优");
+    }else  if(score >75){
+        console.log("良");
+    }else if(score >60){
+        console.log("及格");
+    }else{
+        console.log("不及格");
+    }
+    //改良
+    var score1 = 76;
+    console.log((score1>90&&"优")||(score1>75&&"良")||(score1>60&&"及格")||"不及格");
+
+    //switch和case做的是全等判断，必须值和类型全都相等
+    var score2 = 93;
+    switch(true){
+        case score2 > 90:
+            console.log("优");
+            break;
+        case score2 > 75:
+            console.log("良");
+            break;
+        case score2 > 60:
+            console.log("及格");
+            break;
+        default:
+            console.log("不及格");
+    }
+
+    
+
+</script>
+</html>

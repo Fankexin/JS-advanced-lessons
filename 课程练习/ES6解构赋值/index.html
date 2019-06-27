@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    let [,,third]=[1,2,3];
+    console.log(third);
+
+    /*
+         ...理解为剩余运算符，其他元素匹配完成后剩下的元素
+    */
+    let [head, ...tail]=[1,2,3,4];
+    console.log(head,tail);
+
+    /*
+        当左侧结构元素个数大于右侧时，未匹配的变量会是undefined，...跟的变量未匹配元素[]
+    */
+    let [d,e, ...f]=['a'];
+    console.log(d,e,f);//a undefined Array(0)
+
+    /*
+        对象解构赋值，根据键名来进行赋值，然后完成赋值
+    */
+    let {bar,foo}={foo:"foo1",bar:"bar1"};
+    console.log(bar,foo);//bar1 foo1
+
+    // let {bar,foo,other}={foo:"foo1",bar:"bar1"};
+    // console.log(bar,foo,other);//error
+   
+    let str=new String("abcdef");
+    let [a,b,c]=str;
+    console.log(a,b,c);//a b c
+
+    let [e1,f1]="ef";
+    console.log(e1,f1);//e f
+
+    /*number对象上会有toString方法*/
+    let num=new Number(5);
+    let {toString:s1}=num;
+    console.log(s1);//ƒ toString() { [native code] }
+
+    function fn1({x=0,y=0}={}){
+        return [x,y];
+    }
+    console.log(fn1({x:3,y:4}));//(2) [3, 4]
+
+    let [x1,y1]=['a','b'];
+    [y1,x1]=[x1,y1];
+    console.log(x1,y1);//b a
+
+    function example(){
+        return [1,2,3];
+    }
+    let [a2,b2,c2]=example();
+    console.log(a2,b2,c2);//1 2 3
+
+    let json1={
+        "username":"zhangsan",
+        "courseList":["高数","english"],
+        "age":20
+    }
+    /*
+        JSON MATH都是对象，没有构造函数
+        JSON.parse()
+    */
+    let jsonStr=JSON.stringify(json1);
+    console.log(jsonStr);//{"username":"zhangsan","courseList":["高数","english"],"age":20}
+    json1=JSON.parse(jsonStr);
+
+    let {username}=json1;
+    console.log(username);//zhangsan
+
+    let str3='abcdef';
+    for(let i of str3){
+        console.log(i);
+    }
+    console.log(str3.repeat(3));//abcdefabcdefabcdef
+
+    let reg1=/xyz/gi;
+    let reg2=new RegExp("xyz","gi");
+    let reg3=new RegExp(/xyz/gi);
+    let reg4=new RegExp(/xyz/gi,'i');
+    /*正则表达式对象，flags获取到正则表达式修饰符*/
+    console.log(reg1.flags);//gi
+
+    /*
+        sticky y修饰符 他会从上一次匹配成功的结束位置开始匹配
+    */
+    let str4="aaa_aa_a";
+    let reg5=/a+/g;
+    let reg6=/a+/y;
+    console.log(reg5.exec(str4));
+    console.log(reg5.exec(str4));
+
+    console.log(reg6.exec(str4));
+    //从上次匹配结果的索引位置
+    reg6.lastIndex;
+    console.log(reg6.exec(str4));
+    //可以根据 正则对象.sticky属性判断是否设置了y属性
+    console.log(reg6.sticky);
+    
+</script>
+</html>

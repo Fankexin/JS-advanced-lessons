@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // var a =1;
+    // function fn1(){
+    //     console.log(a);//1
+    //     var b=2;
+    //     var c=3;
+    //     function fn2(){
+    //         var c = 30;
+    //         var d = 4;
+    //         console.log(c);
+    //     }
+    //     fn2();//30
+    //     console.log(c);//3
+    //     console.log(d);//error
+    // }
+    // fn1();
+
+    // var a =1;//全局变量，所有位置均可访问到
+    // function fn1(){
+    //     console.log(a);//1
+    //     var b=2;
+    //     var c=3;
+    //     function fn2(){
+    //         c = 30;
+    //         var d = 4;
+    //         console.log(c);
+    //     }
+    //     fn2();//30
+    //     console.log(c);//30
+    //     console.log(d);//error
+    // }
+    // fn1();
+
+    //函数和变量在完成定义之后，作用域就是确定的，和调用形式没有关系
+    var username = "jack";
+    function foo(){
+        username="bill";//username找到的定义是全局的
+        console.log(username);//bill
+    }
+    function bar(){
+        var username = "mike";//不影响foo
+        foo();
+        console.log(username);//mike
+    }
+    bar();//bill mike
+
+    //ES5没有块级作用域
+    //只有函数的局部作用域
+    if(true){
+        var a = 2;
+    }
+    console.log(a);//2
+    function fn1(){
+
+    }
+    //ES6
+    // if(true){
+    //     let b = 1;
+    // }
+    // console.log(b);//error
+
+    var user =5;
+    document.onclick = function(){
+        console.log(user);
+        user=10;
+    }
+    if(true){
+        var user = 30;
+    }
+    (function(){
+        if(true){
+            var user = 50;
+        }
+    })()
+
+    //上下文，当某行代码执行过程中，他的上下文环境
+    //当前作用域包含的变量，函数调用栈，this的指向
+    function foo1(){
+        var a = 1;
+        var b = 2;
+        function bar1(){
+            var c = 3;
+            var b = 4;
+        }
+        bar1();
+    }
+    foo1();
+
+    
+</script>
+</html>

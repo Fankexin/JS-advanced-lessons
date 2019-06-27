@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // 对象instanceof构造函数
+    // 1.判断对象能否使用该构造函数实例化得到
+    // 2.判断对象的原型链上能够找到该构造函数的原型
+
+    // 对象.__proto__.__proto__（长度不确定）==构造函数.prototype
+    console.log(Object instanceof Function);//true
+    console.log(Object.__proto__==Function.prototype);//true 
+    console.log(Object instanceof Object);//true 任意对象instanceof Object都为true
+    console.log(Object.__proto__==Object.prototype);//false
+    console.log(Number instanceof Object);//true
+    console.log(Math instanceof Object);//true
+
+    function Person(username,age){
+        this.username=username;
+        this.age=age;
+    }
+    var p = new Person("zhangsan",20);
+    console.log(p.__proto__==Person.prototype);//true 只有构造函数才有prototype
+    //Person.prototype.__proto__=Object.prototype
+
+    var o={
+        _x:1,
+        get x(){
+            return this._x;
+        },
+        set x(val){
+            this._x=val;
+        }
+    };
+    o.x=10;
+    console.log(o.x,o._x);//10 10
+
+    var obj={
+        x:10,
+        y:20
+    };
+    console.log(obj.x);
+    console.log(obj['x']);
+    var z="age";
+    obj.z=20;
+    console.log(obj);//{x: 10, y: 20, z: 20}
+    obj[z]=30;
+    console.log(obj);//{x: 10, y: 20, z: 20, age: 30}
+
+    var obj1={
+        "username":"zhangsan",
+        "age":20
+    };
+    var obj2=Object.create(obj1);//__proto__:"username":"zhangsan", "age":20
+    console.log(obj2);
+
+    function Per(username,age){
+        this.username=username;
+        this.age=age;
+        // this.sayHi=function(){
+        //     console.log(this.username);
+        // }
+    }
+    Per.prototype.sayHi=function(){
+        console.log(this.username);
+    }
+    var per1=new Per('zhangsan',20);
+    var per2=new Per('lisi',22);
+    console.log(per1.__proto__==Per.prototype);
+    //prototype是通过调用构造函数而创建的那个对象实例的原型对象
+    //对象具有属性__proto__，可称为隐式原型，一个对象的隐式原型指向构造该对象的构造函数的原型，这也保证了实例能够访问在构造函数原型中定义的属性和方法。
+    per1.sayHi();
+    per2.sayHi();
+    // 1.var obj3={
+    //     属性名：属性值，
+    //     方法名：方法
+    // }
+    // 2.var obj3={}; var obj4=Object.create(obj3);
+    // 3.function Per(){}; var person1 = new Per();
+</script>
+</html>
